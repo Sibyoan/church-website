@@ -1,16 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import { FaHeart } from 'react-icons/fa';
+import { Heart } from 'lucide-react';
 
 export default function DonateButton() {
   return (
     <Link
       href="/give"
-      className="fixed bottom-6 right-6 bg-[#d4af37] text-white p-4 rounded-full shadow-lg hover:bg-[#b8941f] btn-hover-lift z-40 flex items-center gap-2 md:hidden glow-gold"
+      className="fixed bottom-6 right-6 bg-[#D4AF37] text-white p-4 rounded-full shadow-xl hover:bg-[#B8941F] hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 z-40 flex items-center gap-2 md:hidden"
       aria-label="Give"
     >
-      <FaHeart className="text-xl" />
+      <Heart size={20} />
       <span className="font-semibold">Give</span>
     </Link>
   );

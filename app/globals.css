@@ -1,33 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @layer base {
   :root {
-    /* Color System - Peaceful & Faith-Oriented */
-    --color-primary: #1e3a8a; /* Soft Blue */
-    --color-primary-light: #3b82f6;
-    --color-primary-dark: #1e40af;
+    /* Premium Church Color System */
+    --color-primary: #1E3A8A; /* Deep Royal Blue */
+    --color-primary-light: #3B82F6;
+    --color-primary-dark: #1E40AF;
     
-    --color-secondary: #f8fafc; /* Cream/Off White */
-    --color-secondary-dark: #f1f5f9;
+    --color-secondary: #F8FAFC; /* Soft Light Background */
+    --color-secondary-dark: #F1F5F9;
     
-    --color-accent: #d4af37; /* Soft Gold */
-    --color-accent-light: #e5c158;
-    --color-accent-dark: #b8941f;
+    --color-accent: #D4AF37; /* Elegant Gold */
+    --color-accent-light: #E5C158;
+    --color-accent-dark: #B8941F;
     
-    --color-text-primary: #1f2937; /* Dark Gray */
-    --color-text-secondary: #6b7280; /* Muted Gray */
-    --color-text-light: #9ca3af;
+    --color-text-primary: #1F2937;
+    --color-text-secondary: #6B7280;
+    --color-text-light: #9CA3AF;
     
-    --color-background: #ffffff;
-    --color-background-alt: #f8fafc;
+    --color-background: #FFFFFF;
+    --color-background-alt: #F8FAFC;
     
-    /* Animation Timings */
+    /* Animation Timings - Smooth & Professional */
     --duration-fast: 200ms;
     --duration-normal: 300ms;
     --duration-slow: 500ms;
     --duration-slower: 700ms;
     
-    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.6, 1);
   }
@@ -42,8 +43,15 @@
   
   body {
     @apply bg-white text-gray-900 antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-feature-settings: "kern" 1;
     text-rendering: optimizeLegibility;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
   
   /* Respect reduced motion preferences */
@@ -108,26 +116,31 @@
     transition: all var(--duration-slow) var(--ease-smooth);
   }
   
-  /* Button hover effects */
+  /* Premium Button Effects */
   .btn-hover-lift {
-    @apply transition-all duration-300 ease-out;
+    @apply transition-all duration-300;
+    transition-timing-function: var(--ease-smooth);
   }
   
   .btn-hover-lift:hover {
-    @apply scale-[1.02] shadow-lg -translate-y-0.5;
+    @apply shadow-xl -translate-y-1;
+    transform: translateY(-4px);
   }
   
   .btn-hover-lift:active {
-    @apply scale-[0.98] translate-y-0;
+    @apply translate-y-0;
+    transform: translateY(0);
   }
   
-  /* Enhanced Card hover effects */
+  /* Premium Card Effects */
   .card-hover {
-    @apply transition-all duration-500 ease-out;
+    @apply transition-all duration-300;
+    transition-timing-function: var(--ease-smooth);
   }
   
   .card-hover:hover {
-    @apply shadow-2xl -translate-y-2;
+    @apply shadow-lg;
+    transform: translateY(-8px) scale(1.02);
   }
   
   /* Service Card with lift and glow */

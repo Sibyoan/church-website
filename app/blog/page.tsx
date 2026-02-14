@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import { FaBook, FaCalendar, FaArrowRight } from 'react-icons/fa';
+import { BookOpen, Calendar, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface BlogPost {
@@ -66,19 +66,19 @@ export default function Blog() {
   };
 
   return (
-    <div>
+    <div className="pt-16">
       {/* Hero */}
-      <section className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16">
+      <section className="pt-32 pb-24 bg-gradient-to-br from-[#1E3A8A] via-[#2563EB] to-[#1E40AF] text-white">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <FaBook className="text-5xl mx-auto mb-4" />
+            <BookOpen className="mx-auto mb-6" size={64} />
           </motion.div>
           <motion.h1 
-            className="text-4xl md:text-5xl font-bold mb-4"
+            className="text-5xl md:text-6xl font-bold mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
@@ -86,7 +86,7 @@ export default function Blog() {
             Church Blog
           </motion.h1>
           <motion.p 
-            className="text-xl max-w-3xl mx-auto"
+            className="text-xl md:text-2xl max-w-3xl mx-auto text-white/90"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
@@ -97,7 +97,7 @@ export default function Blog() {
       </section>
 
       {/* Blog Posts */}
-      <section className="py-16 bg-[#f8fafc]">
+      <section className="py-24 bg-[#F8FAFC]">
         <div className="container mx-auto px-4">
           {loading ? (
             <motion.div 
@@ -106,7 +106,7 @@ export default function Blog() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900"></div>
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#1E3A8A]"></div>
               <p className="mt-4 text-gray-600">Loading articles...</p>
             </motion.div>
           ) : posts.length === 0 ? (
@@ -116,7 +116,7 @@ export default function Blog() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <FaBook className="text-6xl text-gray-300 mx-auto mb-4" />
+              <BookOpen className="mx-auto mb-4 text-gray-400" size={64} />
               <p className="text-gray-600 text-lg">No blog posts available yet.</p>
               <p className="text-gray-500 text-sm mt-2">Check back soon for inspiring content!</p>
             </motion.div>
@@ -126,93 +126,40 @@ export default function Blog() {
                 {posts.map((post, index) => (
                   <motion.article
                     key={post.id}
-                    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition-shadow duration-500"
-                    initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
-                    whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                    viewport={{ once: true, margin: "-50px" }}
+                    className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ 
-                      duration: 0.8, 
-                      delay: index * 0.15, 
+                      duration: 0.6, 
+                      delay: index * 0.1, 
                       ease: [0.25, 0.1, 0.25, 1] 
                     }}
-                    whileHover={{ y: -8 }}
                   >
                     <Link href={`/blog/${post.slug}`} className="block">
                       <div className="aspect-video bg-gray-200 overflow-hidden">
-                        <motion.img
+                        <img
                           src={post.image}
                           alt={post.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                           loading="lazy"
-                          initial={{ scale: 1.1, opacity: 0 }}
-                          whileInView={{ scale: 1, opacity: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ 
-                            duration: 0.9, 
-                            delay: index * 0.15 + 0.2,
-                            ease: [0.25, 0.1, 0.25, 1] 
-                          }}
-                          whileHover={{ 
-                            scale: 1.08,
-                            transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }
-                          }}
                         />
                       </div>
                       <div className="p-6">
-                        <motion.div 
-                          className="flex items-center gap-2 text-gray-500 text-sm mb-3"
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ 
-                            duration: 0.6, 
-                            delay: index * 0.15 + 0.3,
-                            ease: [0.25, 0.1, 0.25, 1] 
-                          }}
-                        >
-                          <FaCalendar />
+                        <div className="flex items-center gap-2 text-gray-500 text-sm mb-3">
+                          <Calendar size={16} />
                           <time>{formatDate(post.createdAt)}</time>
-                        </motion.div>
-                        <motion.h2 
-                          className="text-2xl font-bold mb-3 text-gray-900 hover:text-blue-900 transition-colors duration-300"
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ 
-                            duration: 0.6, 
-                            delay: index * 0.15 + 0.4,
-                            ease: [0.25, 0.1, 0.25, 1] 
-                          }}
-                        >
+                        </div>
+                        <h2 className="text-2xl font-bold mb-3 text-gray-900 hover:text-[#1E3A8A] transition-colors duration-300">
                           {post.title}
-                        </motion.h2>
-                        <motion.p 
-                          className="text-gray-600 mb-4 line-clamp-3"
-                          initial={{ opacity: 0, y: 15 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ 
-                            duration: 0.6, 
-                            delay: index * 0.15 + 0.5,
-                            ease: [0.25, 0.1, 0.25, 1] 
-                          }}
-                        >
+                        </h2>
+                        <p className="text-gray-600 mb-4 line-clamp-3">
                           {post.excerpt}
-                        </motion.p>
-                        <motion.div
-                          className="inline-flex items-center gap-2 text-blue-900 font-semibold hover:text-[#d4af37] transition-colors duration-300 group"
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ 
-                            duration: 0.6, 
-                            delay: index * 0.15 + 0.6,
-                            ease: [0.25, 0.1, 0.25, 1] 
-                          }}
-                        >
+                        </p>
+                        <div className="inline-flex items-center gap-2 text-[#1E3A8A] font-semibold hover:text-[#D4AF37] transition-colors duration-300 group">
                           Read More 
-                          <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-2" />
-                        </motion.div>
+                          <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-2" />
+                        </div>
                       </div>
                     </Link>
                   </motion.article>
